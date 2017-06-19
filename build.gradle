@@ -3,6 +3,7 @@
  *
  * user guide available at https://docs.gradle.org/3.3/userguide/tutorial_java_projects.html
  */
+
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
@@ -10,6 +11,7 @@ apply plugin: 'com.bmuschko.tomcat'
 sourceCompatibility = 1.8
 version = '1.0'
 
+//解决编码GBK的不可映射字符
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
@@ -27,7 +29,14 @@ dependencies {
 dependencies {
     compile 'org.springframework:spring-context:4.3.8.RELEASE',
     		'org.springframework:spring-web:4.3.8.RELEASE',
-    		'org.springframework:spring-webmvc:4.3.8.RELEASE'
+    		'org.springframework:spring-webmvc:4.3.8.RELEASE',
+    		'org.springframework:spring-orm:4.3.8.RELEASE',
+    		
+    		'org.hibernate:hibernate-core:4.3.11.Final',
+    		
+    		'com.mchange:c3p0:0.9.5.2',
+    		
+    		'mysql:mysql-connector-java:6.0.6'
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     testCompile 'junit:junit:4.12',
     			'org.springframework:spring-test:4.3.8.RELEASE'
@@ -39,5 +48,12 @@ buildscript {
 	}
 	dependencies{
 		classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+	}
+}
+
+test{
+	testLogging{
+		showStandardStreams = true
+		events 'started', 'passed', 'skipped', 'failed'
 	}
 }
