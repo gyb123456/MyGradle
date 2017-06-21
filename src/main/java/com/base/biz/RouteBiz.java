@@ -28,7 +28,7 @@ public interface RouteBiz {
 	 * @param name 线路名称
 	 * @return List<Map>  [{routeNum:12,name:""},{routeNum:13,name:""}]
 	 */
-	public List<Map> findNameAndNumByNameLike(String name);	
+	public List<Map<String,Object>> findNameAndNumByNameLike(String name);	
 	
 	/**根据线路编号查询线路信息
 	 * @param routeNum 线路编号
@@ -39,17 +39,17 @@ public interface RouteBiz {
 	/**查询所有线路的线路名和线路编号
 	 * @return List<Map>  [{routeNum:12,name:""},{routeNum:13,name:""}]
 	 */	
-	public List<Map> getAllNameAndNum();	
+	public List<Map<String,Object>> getAllNameAndNum();	
 	
 	/**根据线路编号查询首末站信息
 	 * @param routeNum 线路编号
 	 * @return List<Map>  [{upTrmlStation:"",downTrmlStation:""},{upTrmlStation:"",downTrmlStation:""}]
 	 */	
-	public List<Map> findTermByNum(Integer routeNum);	
+	public List<Map<String,String>> findTermByNum(Integer routeNum);	
 	
 	/**根据线路编号查询首末班车信息
 	 * @param routeNum 线路编号
 	 * @return List<Map>  [{upFirstTime:"",upLastTime:"",downFirstTime:"",downLastTime:""}]
 	 */
-	public List<Map> findDepartTimeByNum(Integer routeNum);	
+	public List<Map<String,String>> findDepartTimeByNum(Integer routeNum);	
 }
