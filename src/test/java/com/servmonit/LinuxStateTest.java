@@ -18,7 +18,10 @@ public class LinuxStateTest {
 
 	@Test
 	public void stateTest() throws IOException, JSchException{
-		String result = LinuxState.runDistanceShell("root", "ITScai@207", "10.1.30.207"); 
+		String cpuShell = "top -b -n 1 |grep Cpu";    
+	    String diskShell = "df -hl";  
+	    String[] commands = {cpuShell,diskShell};  
+		String result = LinuxState.runDistanceShell(commands,"root", "ITScai@207", "10.1.30.207"); 
 		System.out.println("读取的信息："+result);
 		System.out.println("转换后的信息："+LinuxState.disposeResultMessage(result));
 	}
