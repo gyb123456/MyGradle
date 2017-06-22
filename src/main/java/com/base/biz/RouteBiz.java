@@ -32,9 +32,9 @@ public interface RouteBiz {
 	
 	/**根据线路编号查询线路信息
 	 * @param routeNum 线路编号
-	 * @return Route
+	 * @return List<Route>
 	 */	
-	public Route findByNum(Integer routeNum);
+	public List<Route> findByNum(Integer routeNum);
 	
 	/**查询所有线路的线路名和线路编号
 	 * @return List<Map>  [{routeNum:12,name:""},{routeNum:13,name:""}]
