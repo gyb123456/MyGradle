@@ -22,7 +22,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @ComponentScan(
-	basePackages={"com.sys"},
+	basePackages={"com.sys,com.base"},
 	excludeFilters={
 		@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
 	}
