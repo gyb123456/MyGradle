@@ -58,7 +58,6 @@ public class LinuxState {
         try{
         	ChannelExec channelExec = null;
         	BufferedReader reader = null;
-        	StringBuffer stringBuffer;  
         	StringBuffer bufferResult = new StringBuffer();
         	for (String command : commands) {
         		channelExec = (ChannelExec) session.openChannel("exec");
@@ -69,9 +68,7 @@ public class LinuxState {
             	InputStream in = channelExec.getInputStream();
             	reader = new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8")));
             	String buf = null;
-            	stringBuffer = new StringBuffer();
             	while ((buf = reader.readLine()) != null) {
-            		stringBuffer.append(buf.trim()).append(LINE_SEPARATOR);
             		bufferResult.append(buf.trim()).append(LINE_SEPARATOR);
             	}
         	}        	
