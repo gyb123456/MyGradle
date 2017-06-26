@@ -1,5 +1,9 @@
 package com;
 
+import javax.servlet.Filter;
+
+import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherServletInitializer{
@@ -19,4 +23,14 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
 		return new String[]{"/"};	//将DispatcherServlet映射到"/"
 	}
 
+	@Override
+	protected Filter[] getServletFilters() {
+//			OpenSessionInViewFilter  openSessionInViewFilter  = new OpenSessionInViewFilter ();
+			CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();  
+	        characterEncodingFilter.setEncoding("UTF-8");  
+	        characterEncodingFilter.setForceEncoding(true);  
+	        return new Filter[] {characterEncodingFilter,characterEncodingFilter};  
+//		return super.getServletFilters();
+	}
+	
 }

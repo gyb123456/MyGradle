@@ -13,12 +13,16 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.sys.biz.impl.ConstTypeBizImpl;
 
 @Configuration
 @ComponentScan(
@@ -27,6 +31,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 		@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
 	}
 )
+@EnableTransactionManagement
 public class RootConfig {
 
 	/**配置C3P0
@@ -34,7 +39,7 @@ public class RootConfig {
 	@Bean
 	public ComboPooledDataSource dataSource() throws PropertyVetoException{
 		ComboPooledDataSource cpds = new ComboPooledDataSource();
-		cpds.setDriverClass("com.mysql.jdbc.Driver");
+		cpds.setDriverClass("com.mysql.cj.jdbc.Driver");
 		cpds.setJdbcUrl("jdbc:mysql://10.1.30.207:3306/InfoIssue?characterEncoding=utf8");
 		cpds.setUser("root");
 		cpds.setPassword("root");
@@ -65,4 +70,5 @@ public class RootConfig {
 	public BeanPostProcessor persistenceTranslation(){
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+	
 }
