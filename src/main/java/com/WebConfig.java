@@ -19,13 +19,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc	//启用Spring MVC组件
 @ComponentScan("com.sys.ctrl")	//启用组件扫描
 public class WebConfig extends WebMvcConfigurerAdapter{
-
+	
 	//配置JSP视图解析器
 	@Bean
 	public ViewResolver viewResolver(){
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/JSP/");
 		resolver.setSuffix(".jsp");
+		//可以在JSP页面中通过${}访问beans
 		resolver.setExposeContextBeansAsAttributes(true);
 		return resolver;
 	}
@@ -33,7 +34,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	//配置静态资源的处理
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
+		configurer.enable();//把针对静态资源的请求转交给servlert容器的default servlet处理
 	}
 
 	/**

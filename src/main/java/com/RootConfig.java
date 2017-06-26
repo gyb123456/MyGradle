@@ -31,6 +31,7 @@ import com.sys.biz.impl.ConstTypeBizImpl;
 		@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
 	}
 )
+//启用注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 @EnableTransactionManagement
 public class RootConfig {
 
