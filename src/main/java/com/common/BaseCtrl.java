@@ -1,6 +1,7 @@
 package com.common;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,6 +33,25 @@ public class BaseCtrl<BIZ extends BaseBiz, ID extends Serializable, PO> {
 	@RequestMapping("save")
 	@ResponseBody
 	public PO save(PO po, HttpSession session){
+		try {
+			Field field = po.getClass().getDeclaredField("updateBy");
+			if(field != null){//说明此实例类含有updateBy属性
+				field.set(po, 100);//设置updateBy为当前登录用户的id，但是要求updateBy属性必须为public类型的！！！，否则抛异常
+			}
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 		biz.save(po);
 		return po;
 	}
